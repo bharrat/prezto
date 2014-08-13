@@ -65,7 +65,7 @@ function build_prompt {
   print -Pn '%{%F{blue}%}%n%{%F{red}%}@%{%F{cyan}%}$(box_name)'
   print -Pn '%F{red}%} in %F{blue}${PWD/#$HOME/~} '
   if $git_status; then
-    print -Pn '%F{green}${(e)git_info[prompt]}${git_info[status]}'
+    print -Pn '%F{green}${(e)git_info[prompt]}|${git_info[status]}'
   fi
   if [ ! -z "$VER" -a "$VER" != " " ]; then
      print -Pn "%F{red}%}{"$VER"}"
@@ -131,15 +131,16 @@ function prompt_paradox_setup {
   zstyle ':prezto:module:editor:info:keymap:alternate' format '%B%F{red}❮%f%b'
   zstyle ':prezto:module:git:info:action' format '! %s'
   zstyle ':prezto:module:git:info:added' format '✚'
-  zstyle ':prezto:module:git:info:ahead' format '⬆'
-  zstyle ':prezto:module:git:info:behind' format '⬇'
+  zstyle ':prezto:module:git:info:ahead' format '⬆ %A'
+  zstyle ':prezto:module:git:info:behind' format '⬇ %B'
   zstyle ':prezto:module:git:info:branch' format '⭠ %b'
-  zstyle ':prezto:module:git:info:commit' format '➦ %.7c'
-  zstyle ':prezto:module:git:info:deleted' format '✖'
-  zstyle ':prezto:module:git:info:modified' format '✱'
+
+  zstyle ':prezto:module:git:info:commit' format ' ➦ %c %.7c'
+  zstyle ':prezto:module:git:info:deleted' format ' ✖'
+  zstyle ':prezto:module:git:info:modified' format ' ✱'
   zstyle ':prezto:module:git:info:position' format '%p'
   zstyle ':prezto:module:git:info:renamed' format '➙'
-  zstyle ':prezto:module:git:info:stashed' format 's'
+  zstyle ':prezto:module:git:info:stashed' format ''
   zstyle ':prezto:module:git:info:unmerged' format '═'
   zstyle ':prezto:module:git:info:untracked' format '?'
   zstyle ':prezto:module:git:info:keys' format \
