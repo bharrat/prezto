@@ -4,16 +4,15 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-
 # Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+if [[ -s "${ZDOTDIR:-$HOME}/dotrc/prezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/dotrc/prezto/init.zsh"
 fi
 
 # Customize to your needs...
 
 # HUB > Git
-alias git=hub
+#alias git=hub
 if type compdef >/dev/null; then
    compdef hub=git
 fi
@@ -21,3 +20,33 @@ fi
 # Git escape wonderfulness
 autoload -Uz git-escape-magic
 git-escape-magic
+
+
+source $HOME/dotrc/env.rc
+source $HOME/dotrc/aliases.rc
+
+path=(
+  /usr/local/{bin,sbin}
+  /Users/bpatel/android-sdk/platform-tools
+  $HOME/bin
+  $path
+)
+
+# Customize to your needs...
+#export PATH=:/Users/bpatel/android-sdk/platform-tools:/usr/local/share/npm/bin:$HOME/bin:$PATH
+if [[ $OSTYPE == 'darwin'* ]]; then
+	#source "`brew --prefix`/etc/grc.bashrc"
+	#export PATH=/usr/local/sbin:/opt/local/bin:/opt/local/sbin:$PATH
+else 
+    export CLICOLOR=1
+	export LS_COLORS='di=33:fi=0:ln=95:pi=5:so=5:bd=5:cd=5:or=37:mi=0:ex=31:*.rpm=90'
+	alias ls='ls --color=auto'
+
+fi 
+
+if [ -f $HOME/local.rc ]; then
+ #echo "Found local settings"
+ source $HOME/local.rc
+fi 
+
+source $HOME/dotrc/git-flow-completion/git-flow-completion.zsh
